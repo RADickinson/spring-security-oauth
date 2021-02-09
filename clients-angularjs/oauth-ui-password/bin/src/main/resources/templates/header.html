@@ -89,10 +89,8 @@ app.controller('mainCtrl', function($scope,$resource,$http,$httpParamSerializer,
             headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8"},
             data: $httpParamSerializer(params)
         }
-        console.log("Obtain access token req: " + req);
         $http(req).then(
             function(data){
-            	   console.log("Access token received: " + data.data.access_token);
                 $http.defaults.headers.common.Authorization= 'Bearer ' + data.data.access_token;
                 var expireDate = new Date (new Date().getTime() + (1000 * data.data.expires_in));
                 $cookies.put("access_token", data.data.access_token, {'expires': expireDate});

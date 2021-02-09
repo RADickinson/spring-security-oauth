@@ -35,6 +35,7 @@ public class CustomPreZuulFilter extends ZuulFilter {
 
             final String refreshToken = extractRefreshToken(req);
             if (refreshToken != null) {
+              logger.info("Refresh token: {}",refreshToken);
                 final Map<String, String[]> param = new HashMap<String, String[]>();
                 param.put("refresh_token", new String[] { refreshToken });
                 param.put("grant_type", new String[] { "refresh_token" });

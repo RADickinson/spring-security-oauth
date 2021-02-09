@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="PATTERN" value="%date [%thread] %-5level %logger{35} - %msg %n" />
+
+  <property name="LOGDIR" value="target/logs" />
+  <property name="MAINLOGFILE" value="core.log" />
+  <property name="BACKUPLOGFILE" value="core.%d{yyyy-MM-dd}.log" />
+  <property name="MDALOGFILE" value="andromda.log" />
+  <property name="BACKUPMDALOGFILE" value="andromda.%d{yyyy-MM-dd}.log" />
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGDIR}/${MAINLOGFILE}</file>
+    <append>true</append>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${LOGDIR}/${BACKUPLOGFILE}</fileNamePattern>
+      <!-- keep 30 days' worth of history -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Runtime loggers -->
+  <logger name="org.hibernate.hql.ast.AST" level="ERROR" />
+  <logger name="org.hibernate.SQL" level="WARN" />
+  <logger name="org.hibernate.type" level="WARN" />
+  <logger name="org.hibernate.tool.hbm2ddl" level="INFO" />
+  <logger name="org.hibernate.hql" level="WARN" />
+  <logger name="org.hibernate.cache" level="WARN" />
+  <logger name="org.hibernate.transaction" level="WARN" />
+  <logger name="org.hibernate.jdbc" level="WARN" />
+  <logger name="org.hibernate.connection" level="WARN" />
+  <logger name="org.hibernate" level="ERROR" />
+  <logger name="org.springframework" level="INFO" />
+  <logger name="org.apache" level="ERROR" />
+  <logger name="org.dozer" level="ERROR" />
+  <logger name="org.jboss" level="ERROR" />
+  <logger name="org.jasypt" level="ERROR" />
+  <logger name="org.dbunit" level="INFO" />
+
+  <!-- USP loggers -->
+  <logger name="com.baeldung" level="DEBUG" />
+  <logger name="com.olmgroup.usp.facets.core" level="INFO" />
+  <logger name="com.olmgroup.usp.facets.spring" level="INFO" />
+  <logger name="com.olmgroup.usp.facets.track" level="INFO" />
+  <logger name="com.olmgroup.usp.facets.validation" level="INFO" />
+  <logger name="com.olmgroup.usp.facets.version" level="INFO" />
+  <logger name="com.olmgroup.usp" level="INFO" />
+
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+  </root>
+
+</configuration>

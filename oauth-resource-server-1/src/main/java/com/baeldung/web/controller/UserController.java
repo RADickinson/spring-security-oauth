@@ -2,6 +2,8 @@ package com.baeldung.web.controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserController {
 
+  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+  
     @PreAuthorize("#oauth2.hasScope('read')")
     @RequestMapping(method = RequestMethod.GET, value = "/users/extra")
     @ResponseBody
@@ -20,6 +24,8 @@ public class UserController {
         OAuth2AuthenticationDetails oauthDetails = (OAuth2AuthenticationDetails) auth.getDetails();
         Map<String, Object> details = (Map<String, Object>) oauthDetails.getDecodedDetails();
         System.out.println("User organization is " + details.get("organization"));
+        logger.debug("Authentication: {}", auth);
+        logger.debug("OAuth2 details: {}", details);
         return details;
     }
 }
