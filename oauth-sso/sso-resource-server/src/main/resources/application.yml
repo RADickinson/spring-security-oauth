@@ -9,5 +9,6 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8083/auth/realms/baeldung
-          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
+          issuer-uri: https://login.microsoftonline.com/4865ff4e-a84e-49ca-a5a6-3bc9e823eb87/v2.0
+#          issuer-uri: https://sts.windows.net/4865ff4e-a84e-49ca-a5a6-3bc9e823eb87/
+          jwk-set-uri: https://login.microsoftonline.com/4865ff4e-a84e-49ca-a5a6-3bc9e823eb87/discovery/v2.0/keys
